@@ -1,0 +1,16 @@
+.row{
+
+    width : 100%;
+    height : auto;
+    margin : 12px;
+    padding : 5px;
+    float : left;
+
+
+}
+
+.row:hover{
+    box-shadow: 0 4px 8px 2px rgba(0,0,0,0.2);
+
+}
+

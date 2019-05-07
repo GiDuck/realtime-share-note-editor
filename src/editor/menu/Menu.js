@@ -14,7 +14,7 @@ library.add(faCaretDown);
         return(
             <li className="menu"
                 id={this.props.menu.name}
-                onClick={(e)=>{
+                onMouseDown={(e)=>{
                     e.preventDefault();
 
                     this.subMenuObj = this.props.menu;

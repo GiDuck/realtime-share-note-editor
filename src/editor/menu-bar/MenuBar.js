@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import "./menubar.css";
 import Menu from "../menu/Menu";
-import PreLoader from "../preloader/PreLoader";
 import { withSwalInstance } from 'sweetalert2-react';
 import swal from 'sweetalert2';
 
@@ -12,7 +11,6 @@ class MenuBar extends Component{
 
     componentWillMount(){
 
-        this.setState({isShowLoader : false, size : 20, text : "loading..."});
         const menus = [];
 
         //Menu component initial API call
@@ -49,7 +47,7 @@ class MenuBar extends Component{
             image : "https://img.icons8.com/metro/26/000000/text-color.png",
             contextMenu : [],
             defaultParameters : [],
-            defaultAction : 'document.execCommand("underline", false, null);'
+            defaultAction : ' document.execCommand("underline", false, null);'
         });
 
         //"let range=window.getSelection().getRangeAt(0) if(!range.collapsed){let newSpan=document.createElement(\"span\");newSpan.innerText=range.toString();let ancestorNode=range.commonAncestorContainer;if(ancestorNode.nodeType===3){let newAncestor=document.createElement(\"span\");newAncestor.appendChild(ancestorNode.innerText);ancestorNode=ancestorNode.parentElement;} if(getComputedStyle(ancestorNode)[\"textDecorationLine\"]!==\"underline\"){console.log(\"얘는 밑줄없음\");newSpan.style.textDecoration=\"underline\";}else{console.log(\"얘는 밑줄있음\");newSpan.style.textDecoration=\"none\"};newSpan.appendChild(range.extractContents());range.insertNode(newSpan);}"
@@ -74,7 +72,8 @@ class MenuBar extends Component{
         menus.push({
             name : "align",
             image : "https://img.icons8.com/metro/26/000000/align-right.png",
-            contextMenu : [{name : "left",onClick : alignSizeDefaultAction, parameters : ["justifyLeft"]},
+            contextMenu :
+                [{name : "left",onClick : alignSizeDefaultAction, parameters : ["justifyLeft"]},
                 {name : "center", onClick : alignSizeDefaultAction, parameters : ["justifyCenter"]},
                 {name : "right", onClick : alignSizeDefaultAction, parameters : ["justifyRight"]}],
             defaultParameters : [],
@@ -210,7 +209,6 @@ class MenuBar extends Component{
               <ul className="menubar-list">
                   {this._render()}
               </ul>
-                {this.state.isShowLoader ? this.initLoader(this.state.size, this.state.text) : undefined }
                 {this.state.showingContextMenu ? this._renderContextMenu() : undefined}
                 {!swal.isVisible() && this.state.showingImageUploadPopUp ? this.imageUploadPopUp(this.setPopUpState) : undefined}
                 {!swal.isVisible() && this.state.showingLinkPopUp ? this.linkPopUp(this.setPopUpState) : undefined}
@@ -221,22 +219,6 @@ class MenuBar extends Component{
         );
     };
 
-    initLoader(size, text){
-        if(typeof size !== "number" || size < 1)
-            throw Error("loader에 지정하는 단위는 반드시 정수여야 합니다.");
-        return <PreLoader size = {size} text = {text}/>
-    }
-
-    showLoader(size, text){
-
-        this.setState({isShowLoader : true, size : size, text : text})
-
-    }
-
-    dismissLoader(){
-        this.setState({isShowLoader : false})
-
-    }
 
 
     videoUploadPopUp(setPopUpState){
@@ -329,6 +311,7 @@ class MenuBar extends Component{
 
                         if (range.collapsed && result) {
                             document.execCommand("insertImage", false, "https://pds.joins.com//news/component/htmlphoto_mmdata/201805/27/5a5d7258-bbff-406b-a7ae-48caf0bd192a.jpg");
+
                         }
 
                     })

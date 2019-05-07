@@ -1,12 +1,18 @@
 .loader-container{
+    width : 80%;
     display : inline-block;
     padding : 12px;
-    z-index: 9999;
     position: absolute;
+    z-index: 9999;
+
+}
+
+.loader-set{
+    float : right;
 }
 
 .loader {
-    border: 16px solid #f3f3f3; /* Light grey */
+    border: 16px solid #F08080; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
     border-radius: 50%;
     width: 120px;

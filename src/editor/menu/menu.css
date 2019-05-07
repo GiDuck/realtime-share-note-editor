@@ -12,23 +12,15 @@
     text-align: center;
     cursor : pointer;
 
-
 }
 
 .menu:hover{
     background-color: red;
 }
 
-.context-menu{
-
-
-}
-
 img{
-
     margin: 5px;
     vertical-align: middle;
-
 }
 
 i{

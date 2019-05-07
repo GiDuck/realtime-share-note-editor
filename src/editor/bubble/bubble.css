@@ -1,8 +1,10 @@
 .bubble{
     position : absolute;
-    min-height: 10px;
+    min-height: 20px;
     min-width: 20px;
+    padding : 10px;
+    text-align : center;
     border-style: none;
-    border-radius: 20%;
+    border-radius: 30%;
     z-index: 9999;
 }

@@ -6,13 +6,18 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.17",
     "@fortawesome/free-solid-svg-icons": "^5.8.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
+    "immutable": "^4.0.0-rc.12",
     "react": "^16.8.6",
     "react-contenteditable": "^3.2.6",
     "react-dom": "^16.8.6",
+    "react-redux": "^7.0.3",
     "react-scripts": "2.1.8",
+    "redux": "^4.0.1",
+    "redux-actions": "^2.6.5",
     "socket.io-client": "^2.2.0",
+    "sweetalert2": "latest",
     "sweetalert2-react": "^0.8.1",
-    "sweetalert2": "latest"
+    "Immutable": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

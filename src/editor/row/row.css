@@ -1,16 +1,19 @@
 .row{
 
-    width : 100%;
+    width : 95%;
     height : auto;
     margin : 12px;
     padding : 5px;
-    float : left;
-
+    display : block;
 
 }
 
 .row:hover{
     box-shadow: 0 4px 8px 2px rgba(0,0,0,0.2);
+}
 
+.row > img{
+    max-width : 800px;
+    height : auto;
 }
 

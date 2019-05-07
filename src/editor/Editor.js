@@ -1,52 +1,66 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import MenuBar from "./menu-bar/MenuBar";
 import Flat from "./flat/Flat";
-import * as action from "./action.js";
+import * as action from "./editorModule.js";
 import "./editor.css";
 import {Socket} from "./socket.js";
+import PreLoader from "./preloader/PreLoader";
+import {bindActionCreators} from 'redux';
+import {connect} from "react-redux";
+import * as defaultAction from "../actions/defaultActions"
+import Cursor from "./cursor";
 
 
-class Editor extends Component{
+
+class Editor extends Component {
 
 
     componentWillUnmount() {
         this.socket.disconnect();
     }
 
-    componentWillMount() {
-        this.menubarRef = React.createRef();
-    }
 
     constructor(props, context) {
         super(props, context);
-        this.params = {
-            noteId : "note1",
-            userId : "giduck" + new Date().getTime()};
-        this.socket = new Socket();
-        this.params.socketAction = {};
-        this.params.cursorAction = {
-            saveCaretPosition : {element : undefined, position : 0, rangeObj : undefined},
-            saveSelection : action.saveSelection,
-            recoverSelection : action.recoverSelection};
-        this.params.loaderShow = (size, text) => {
-            this.menubarRef.current.showLoader(size, text);
-            setTimeout(()=> {
-                this.menubarRef.current.dismissLoader();
-            } , 3000 )};
-        this.socket.init(this.params.noteId, this.params.userId, this);
-        this.params.socket = this.socket;
 
+        let userId = "giduck" + new Date().getTime();
+        let noteId = "note1";
+
+        props.DefaultAction.setUserId(userId);
+        props.DefaultAction.setNoteId(noteId);
+        props.DefaultAction.setCursor(new Cursor());
+
+        let socket = new Socket();
+        socket.init(noteId, userId, this);
+        props.DefaultAction.setSocket(socket);
     }
 
     render() {
-        return(
-            <div id="editor" className="editor-body">
-                <MenuBar {...this.params} ref = {this.menubarRef}/>
-                <Flat {...this.params}/>
+        return (
+           <div>
+               {this.props.preloader.isShowLoader ? this.initLoader(this.props.preloader.size, this.props.preloader.text) : undefined}
+               <div id="editor" className="editor-body">
+                    <MenuBar {...this.params}/>
+                    <Flat {...this.params}/>
+                </div>
             </div>
         );
     }
 
+
+    initLoader(size, text) {
+        if (typeof size !== "number" || size < 1)
+            throw Error("loader에 지정하는 단위는 반드시 정수여야 합니다.");
+        return <PreLoader size={size} text={text}/>
+    }
+
+
 }
 
-export default Editor;
+export default connect(
+    (state) => ({...state}),
+    (dispatch) => ({
+        DefaultAction : bindActionCreators(defaultAction, dispatch)
+    })
+)(Editor);
+

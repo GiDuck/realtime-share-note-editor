@@ -1,8 +1,8 @@
 .editor-body{
 
-    width: 100%;
+    width: 80%;
     min-height: 600px;
-    margin : 10px;
+    margin : 30px;
     overflow : auto;
     border-width : 3px;
     border-radius: 5px;

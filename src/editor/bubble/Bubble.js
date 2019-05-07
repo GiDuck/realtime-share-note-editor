@@ -3,17 +3,16 @@ import "./bubble.css";
 
 class Bubble extends Component{
 
-    componentWillMount() {
-        this.setState({
-            x : this.props.x,
-            y : this.props.y,
-            color : this.props.color,
-            name : this.props.name
-        })
-    }
-
     render() {
-        return(<div className="bubble" style={{backgroundColor : this.state.color, left : this.state.x, top : this.state.y}}>{this.state.name + " 가 수정중.."}</div>);
+        let userName = this.props.userName;
+        if(userName.length > 8){
+            userName = userName.slice(0, 8) + ".. 가 수정 중";
+        }
+        return(
+            <div className="bubble"
+                 style={{backgroundColor : this.props.color, left : this.props.x, top : this.props.y}}>
+            {userName}
+            </div>);
     }
 }
 
